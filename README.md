@@ -4,6 +4,11 @@ Some useful utilities for RGEO
 
 Documention on the Internet was hard to come by, so these have been fumbled together.
 
+## Setup
+
+- install the gems
+- duplicate the `options_example` file and rename it `options`. If you are planning on upload data into MySQL, update this file with your SQL credentials.
+
 ## How to use
 
 ### Option 1
