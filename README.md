@@ -21,6 +21,5 @@ make_geojson - convert array of features to geojson file
 ## to do
 
 1. Clean up each method - make more consistent
-2. Create parent file which requires all others
-3. Create better tests
-4. Create better documentation
+2. Create better tests
+3. Create better documentation

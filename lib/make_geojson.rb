@@ -1,4 +1,4 @@
-def make_geojson(name, features)
+def make_geojson(name, features, simplify = "")
   result = {
     "type" => "FeatureCollection",
     "name" => name,
@@ -16,15 +16,17 @@ def make_geojson(name, features)
     }
 
     if f.respond_to? :geometry
+        unless simplify == ""
+            tmp["geometry"] = { "coordinates" => f.geometry.simplify(simplify).coordinates }
+        else
+            tmp["geometry"] = { "coordinates" => f.geometry.coordinates }
+        end
         ## Probably a ShapeFile
         if f.geometry.geometry_type.to_s == "MultiPolygon"
-            tmp["geometry"] = { "coordinates" => f.geometry.coordinates }
             tmp["geometry"]["type"] = "MultiPolygon"
         elsif f.geometry.geometry_type.to_s == "Polygon"
-            tmp["geometry"] = { "coordinates" => f.geometry.coordinates.first }
             tmp["geometry"]["type"] = "Polygon"        
         elsif f.geometry.geometry_type.to_s == "Point"
-            tmp["geometry"] = { "coordinates" => f.geometry.coordinates }
             tmp["geometry"]["type"] = "Point"
         else
             puts "Something here"
